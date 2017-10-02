@@ -8,7 +8,7 @@ Role Variables
 
 ```
 nvidia_docker_install_ppa_driver: False
-nvidia_docker_driver_version: 384
+nvidia_docker_driver_version: 375
 nvidia_docker_deb_url: https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
 ```
 
@@ -16,7 +16,7 @@ nvidia_docker_deb_url: https://github.com/NVIDIA/nvidia-docker/releases/download
   [Proprietary GPU Drivers PPA](https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa) or not,
   default is `False`, install from default repository
 - `nvidia_docker_driver_version` is a variable to specify version for graphics driver,
-  current default is `384`, but it will change in future release.
+  current default is `375`, but it will change in future release.
 - `nvidia_docker_deb_url` is a variable to specify deb package url for nvidia-docker
   current default is `https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb`
   and it will change in future release.
