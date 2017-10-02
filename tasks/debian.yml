@@ -14,7 +14,7 @@
     name: nvidia-modprobe
     state: present
 
-- name: NVIDIA graphics driver {{ nvidia_driver_version }} is installed
+- name: NVIDIA graphics driver {{ nvidia_docker_driver_version }} is installed
   apt:
     name: 'nvidia-{{ nvidia_docker_driver_version }}'
     state: present
