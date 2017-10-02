@@ -7,7 +7,7 @@
     state: present
     mode: 0644
     update_cache: yes
-  when: {{ nvidia_docker_install_ppa_driver }}
+  when: nvidia_docker_install_ppa_driver
 
 - name: nvidia-modprobe is installed
   apt:
