@@ -18,6 +18,7 @@ Dependencies
 ------------
 
 - [uchida.docker](https://galaxy.ansible.com/uchida/docker/): to install docker community edition
+- [uchida.nvidia-repo](https://galaxy.ansible.com/uchida/nvidia-repo/): to add NVIDIA CUDA/Machine Learning APT repository, for cuda drivers
 
 Example Playbook
 ----------------
