@@ -37,6 +37,14 @@ Including an example of how to use your role (for instance, with variables passe
     - role: uchida.nvidia-docker
 ```
 
+```
+- hosts: servers
+  roles:
+    - role: uchida.nvidia-docker
+      nvidia_docker_install_ppa_driver: True
+      nvidia_docker_driver_version: 384
+```
+
 License
 -------
 
