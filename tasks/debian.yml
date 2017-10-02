@@ -18,6 +18,7 @@
   apt:
     name: 'nvidia-{{ nvidia_docker_driver_version }}'
     state: present
+    install_recommends: no
 
 - name: disable nonveau, opensource version of nvidia graphics driver
   lineinfile:
