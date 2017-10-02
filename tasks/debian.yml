@@ -1,0 +1,31 @@
+---
+
+- name: graphics-driver ppa APT repository is registered
+  apt_repository:
+    repo: ppa:graphics-drivers/ppa
+    filename: graphic-driver
+    state: present
+    mode: 0644
+    update_cache: yes
+  when: {{ nvidia_docker_install_ppa_driver }}
+
+- name: nvidia-modprobe is installed
+  apt:
+    name: nvidia-modprobe
+    state: present
+
+- name: NVIDIA graphics driver {{ nvidia_driver_version }} is installed
+  apt:
+    name: 'nvidia-{{ nvidia_docker_driver_version }}'
+    state: present
+
+- name: disable nonveau, opensource version of nvidia graphics driver
+  lineinfile:
+    dest: /etc/default/grub
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT nouveau.modeset=0"'
+    validate: 'sh -n %s'
+
+- name: nvidia-docker is installed
+  apt:
+    deb: '{{ nvidia_docker_package_url }}'
+    state: present

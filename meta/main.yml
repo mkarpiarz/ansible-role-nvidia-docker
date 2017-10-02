@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Akihiro Uchida
+  description: ansible role to install nvidia-docker
+  license: CC0
+  min_ansible_version: 2.4
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  galaxy_tags:
+    - docker
+    - nvidia
+dependencies:
+  - uchida.docker
