@@ -9,7 +9,7 @@
     name: nvidia-modprobe
     state: present
 
-- name: NVIDIA graphics driver {{ nvidia_docker_driver_version }} is installed
+- name: NVIDIA graphics driver is installed
   apt:
     name: cuda-drivers
     state: present
