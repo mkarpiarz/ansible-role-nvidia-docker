@@ -12,3 +12,4 @@ galaxy_info:
     - nvidia
 dependencies:
   - uchida.docker
+  - uchida.nvidia-repo

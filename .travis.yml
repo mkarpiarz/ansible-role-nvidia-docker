@@ -25,6 +25,7 @@ install:
 
 after_install:
   - ansible-galaxy install uchida.docker
+  - ansible-galaxy install uchida.nvidia-repo
 
 script:
   - ansible-playbook -i localhost, --syntax-check tests/test.yml

@@ -1,13 +1,8 @@
 ---
 
-- name: graphics-driver ppa APT repository is registered
-  apt_repository:
-    repo: ppa:graphics-drivers/ppa
-    filename: graphic-driver
-    state: present
-    mode: 0644
+- name: repository cache is up-to-date
+  apt:
     update_cache: yes
-  when: nvidia_docker_install_ppa_driver
 
 - name: nvidia-modprobe is installed
   apt:
@@ -16,7 +11,7 @@
 
 - name: NVIDIA graphics driver {{ nvidia_docker_driver_version }} is installed
   apt:
-    name: 'nvidia-{{ nvidia_docker_driver_version }}'
+    name: cuda-drivers
     state: present
     install_recommends: no
 
