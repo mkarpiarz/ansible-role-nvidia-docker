@@ -1,26 +1,10 @@
 ---
 
-- name: repository cache is up-to-date
-  apt:
-    update_cache: yes
-
 - name: nvidia-modprobe is installed
   apt:
     name: nvidia-modprobe
     state: present
-
-- name: NVIDIA graphics driver is installed
-  apt:
-    name: cuda-drivers
-    state: present
-    install_recommends: no
-
-- name: disable nonveau, opensource version of NVIDIA graphics driver
-  lineinfile:
-    dest: /etc/default/grub
-    line: 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT nouveau.modeset=0"'
-    validate: 'sh -n %s'
-    create: yes
+    update_cache: yes
 
 - name: nvidia-docker is installed
   apt:
