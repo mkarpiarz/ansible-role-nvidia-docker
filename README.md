@@ -7,12 +7,10 @@ Role Variables
 --------------
 
 ```
-nvidia_docker_deb_url: https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
+nvidia_docker_version: 1.0.1
 ```
 
-- `nvidia_docker_deb_url` is a variable to specify deb package url for nvidia-docker
-  current default is `https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb`
-  and it will change in future release.
+- `nvidia_docker_version` is a variable to specify which version of nvidia-docker, current default value is `1.0.1`
 
 Dependencies
 ------------
@@ -24,12 +22,21 @@ Dependencies
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+install nvidia-docker:
 
 ```
 - hosts: servers
   roles:
     - role: uchida.nvidia-docker
+```
+
+install nvidia-docker version 2.0.2:
+
+```
+- hosts: servers
+  roles:
+    - role: uchida.nvidia-docker
+      nvidia_docker_version: 2.0.2
 ```
 
 License

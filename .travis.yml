@@ -25,7 +25,7 @@ install:
 
 before_script:
   - ansible-galaxy install uchida.docker
-  - ansible-galaxy install uchida.nvidia-repo
+  - ansible-galaxy install uchida.nvidia-driver
 
 script:
   - ansible-playbook -i localhost, --syntax-check tests/test.yml
