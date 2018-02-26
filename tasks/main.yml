@@ -1,5 +1,9 @@
 ---
 
 - name: import task for Debian derivatives
-  import_tasks: debian.yml
-  when: ansible_os_family == "Debian"
+  import_tasks: debian_v1.yml
+  when: ansible_os_family == "Debian" and nvidia_docker_version.startswith('1')
+
+- name: import task for Debian derivatives
+  import_tasks: debian_v2.yml
+  when: ansible_os_family == "Debian" and nvidia_docker_version.startswith('2')
