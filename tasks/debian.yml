@@ -5,6 +5,7 @@
     name: nvidia-modprobe
     state: present
     update_cache: yes
+  when: nvidia_docker_version.startswith('1')
 
 - name: nvidia-docker (v2) is uninstalled
   apt:
