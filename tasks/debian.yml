@@ -69,12 +69,11 @@
 - name: confirm content of /etc/docker/daemon.json after installation of nvidia-docker2
   command: cat /etc/docker/daemon.json
   register: nvidia_docker_daemon_json_v2
-  failed_when: False
   changed_when: False
   when: nvidia_docker_version.startswith('2')
 
 - name: content of /etc/docker/daemon.json is merged
   copy:
-    content: "{{ nvidia_docker_daemon_json_backup.stdout | default('{}') | from_json | combine(nvidia_docker_daemon_json_v2.stdout | default('{}') | from_json) }}"
+    content: "{{ nvidia_docker_daemon_json_backup.stdout | from_json | combine(nvidia_docker_daemon_json_v2.stdout | from_json) }}"
     dest: /etc/docker/daemon.json
-  when: nvidia_docker_version.startswith('2')
+  when: nvidia_docker_version.startswith('2') and nvidia_docker_daemon_json_backup.stdout != ""
