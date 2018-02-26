@@ -76,4 +76,5 @@
   copy:
     content: "{{ nvidia_docker_daemon_json_backup.stdout | from_json | combine(nvidia_docker_daemon_json_v2.stdout | from_json) }}"
     dest: /etc/docker/daemon.json
+    validate: python -m json.tool %s
   when: nvidia_docker_version.startswith('2') and nvidia_docker_daemon_json_backup.stdout != ""
