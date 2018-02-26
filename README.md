@@ -11,6 +11,7 @@ nvidia_docker_version: 1.0.1
 ```
 
 - `nvidia_docker_version` is a variable to specify which version of nvidia-docker, current default value is `1.0.1`
+- `nvidia_docker_docker_version` is a variable to specify which version of docker, current default value is `*`, used only if nvidia_docker_version.startswith('2').
 
 Dependencies
 ------------
