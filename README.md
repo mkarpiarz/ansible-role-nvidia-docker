@@ -1,6 +1,11 @@
 uchida.nvidia-docker
 ====================
 
+[![Ansible Role](https://img.shields.io/ansible/role/20908.svg?maxAge=2592000)](https://galaxy.ansible.com/uchida/nvidia-docker/)
+![Version](https://img.shields.io/github/tag/uchida/ansible-role-nvidia-docker.svg)
+[![License](https://img.shields.io/github/license/uchida/ansible-role-nvidia-docker.svg?maxAge=2592000)](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal)
+[![Travis](https://img.shields.io/travis/uchida/ansible-role-nvidia-docker.svg)](https://travis-ci.org/uchida/ansible-role-nvidia-docker)
+
 ansible role to install nvidia-docker and graphics driver
 
 Role Variables
