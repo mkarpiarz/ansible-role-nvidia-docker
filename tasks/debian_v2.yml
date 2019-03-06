@@ -37,6 +37,13 @@
   failed_when: False
   changed_when: False
 
+# TODO: Automatically check dependencies of nvidia-docker
+- name: nvidia-container-runtime (v2) is installed
+  apt:
+    name: "nvidia-container-runtime={{ nvidia_container_runtime_version }}+docker{{ nvidia_docker_docker_version }}-1"
+    state: present
+  notify: restart docker service
+
 - name: nvidia-docker (v2) is installed
   apt:
     name: "nvidia-docker2={{ nvidia_docker_version }}+docker{{ nvidia_docker_docker_version }}-1"
