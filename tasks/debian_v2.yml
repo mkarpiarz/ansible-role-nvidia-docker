@@ -61,3 +61,11 @@
     dest: /etc/docker/daemon.json
     validate: python -m json.tool %s
   when: nvidia_docker_daemon_json_backup.stdout != ""
+
+- name: Make nvidia the default docker runtime
+  copy:
+    content: "{{ nvidia_docker_daemon_json_v2.stdout | from_json | combine({\"default-runtime\": \"nvidia\"}) }}"
+    dest: /etc/docker/daemon.json
+    validate: python -m json.tool %s
+  when: make_nvidia_default_runtime
+  notify: restart docker service

@@ -3,3 +3,4 @@
 nvidia_docker_version: 1.0.1
 nvidia_container_runtime_version: 1.0.0
 nvidia_docker_docker_version: '*'
+make_nvidia_default_runtime: False
