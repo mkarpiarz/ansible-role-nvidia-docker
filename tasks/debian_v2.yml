@@ -21,11 +21,10 @@
     mode: 0644
   with_items:
   - "{{ distribution.stdout_lines }}"
+  notify: update apt cache
 
-# TODO: Use a handler instead of the following task
-- name: Update apt cache
-  apt:
-    update_cache: yes
+- name: Flush handlers
+  meta: flush_handlers
 
 - name: nvidia-docker (v1) is uninstalled
   apt:

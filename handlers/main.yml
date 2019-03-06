@@ -2,3 +2,7 @@
   service:
     name: docker
     state: restarted
+
+- name: update apt cache
+  apt:
+    update_cache: yes
