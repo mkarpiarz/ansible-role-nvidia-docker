@@ -7,3 +7,12 @@
 - name: import task for Debian derivatives
   import_tasks: debian_v2.yml
   when: ansible_os_family == "Debian" and nvidia_docker_version.startswith('2')
+
+- name: fail for nvidia-docker v1 on RedHat derivatives
+  fail:
+    msg: nvidia-docker v1 installation is not supported for RedHat derivatives
+  when: ansible_os_family == "RedHat" and nvidia_docker_version.startswith('1')
+
+- name: import task for RedHat derivatives
+  import_tasks: redhat_v2.yml
+  when: ansible_os_family == "RedHat" and nvidia_docker_version.startswith('2')

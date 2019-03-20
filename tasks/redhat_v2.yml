@@ -1,0 +1,57 @@
+---
+
+- name: Register distribution variable
+  shell: ". /etc/os-release;echo $ID$VERSION_ID"
+  register: distribution
+
+- name: Add nvidia-docker (v2) yum repo
+  get_url:
+    url: "https://nvidia.github.io/nvidia-docker/{{ item }}/nvidia-docker.repo"
+    dest: /etc/yum.repos.d/nvidia-docker.repo
+    mode: 0644
+  with_items:
+  - "{{ distribution.stdout_lines }}"
+
+- name: nvidia-docker (v1) is uninstalled
+  yum:
+    name: nvidia-docker
+    state: absent
+
+- name: confirm content of /etc/docker/daemon.json
+  command: cat /etc/docker/daemon.json
+  register: nvidia_docker_daemon_json_backup
+  failed_when: False
+  changed_when: False
+
+# TODO: Automatically check dependencies of nvidia-docker
+- name: nvidia-container-runtime (v2) is installed
+  yum:
+    name: "nvidia-container-runtime-{{ nvidia_container_runtime_version }}-1.docker{{ nvidia_docker_docker_version }}"
+    state: present
+  notify: restart docker service
+
+- name: nvidia-docker (v2) is installed
+  yum:
+    name: "nvidia-docker2-{{ nvidia_docker_version }}-1.docker{{ nvidia_docker_docker_version }}.ce"
+    state: present
+  notify: restart docker service
+
+- name: confirm content of /etc/docker/daemon.json after installation of nvidia-docker2
+  command: cat /etc/docker/daemon.json
+  register: nvidia_docker_daemon_json_v2
+  changed_when: False
+
+- name: content of /etc/docker/daemon.json is merged
+  copy:
+    content: "{{ nvidia_docker_daemon_json_backup.stdout | from_json | combine(nvidia_docker_daemon_json_v2.stdout | from_json) }}"
+    dest: /etc/docker/daemon.json
+    validate: python -m json.tool %s
+  when: nvidia_docker_daemon_json_backup.stdout != ""
+
+- name: Make nvidia the default docker runtime
+  copy:
+    content: "{{ nvidia_docker_daemon_json_v2.stdout | from_json | combine({\"default-runtime\": \"nvidia\"}) }}"
+    dest: /etc/docker/daemon.json
+    validate: python -m json.tool %s
+  when: make_nvidia_default_runtime
+  notify: restart docker service
